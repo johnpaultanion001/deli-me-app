@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/customer/home');
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('optimize:clear');
+    // return what you want
+});
+
 // Route::get('/', 'LandingpageController@index')->name('landingpage');
 Route::get('view/{product}', 'LandingpageController@view')->name('view');
 
