@@ -47,6 +47,10 @@
                         Don't have an account?
                         <a href="/register" class="text-primary text-gradient font-weight-bold">Sign up</a>
                       </p>
+                      <p class="mt-4 text-sm text-center">
+                        <a href="/password/reset" class="text-primary text-gradient font-weight-bold">Forgot your password?</a>
+                      </p>
+                     
                 </form>
               </div>
           </div>

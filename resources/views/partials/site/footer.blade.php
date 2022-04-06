@@ -1,15 +1,15 @@
-<footer class="footer position-absolute bottom-2 py-2 w-100">
-        <div class="container">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-12 col-md-6 my-auto">
-              <div class="copyright text-center text-sm text-white text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                Copyright {{ trans('panel.site_title') }} All Rights Reserved
-              </div>
-            </div>
-           
-          </div>
+<footer class="footer bg-secondary">
+  <div class="container">
+    <div class="row align-items-center text-center">
+      <div class="col-lg-12">
+        <div class="copyright text-center text-sm text-white">
+          © <script>
+            document.write(new Date().getFullYear())
+          </script>,
+          Copyright {{ trans('panel.site_title') }} All Rights Reserved
         </div>
-      </footer>
+      </div>
+      
+    </div>
+  </div>
+</footer>

@@ -22,7 +22,7 @@
                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                   @csrf
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-label">Name <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror"  value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -33,7 +33,7 @@
                         @enderror
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-6">
                       <div class="form-group">
                           <label class="form-label">Email <span class="text-danger">*</span></label>
                           <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email">
@@ -44,7 +44,7 @@
                           @enderror
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-6">
                       <div class="form-group">
                           <label class="form-label">Contact Number <span class="text-danger">*</span></label>
                           <input type="number" id="contact_number" name="contact_number" class="form-control @error('contact_number') is-invalid @enderror" value="{{ old('contact_number') }}"   required autocomplete="contact_number">
@@ -55,7 +55,7 @@
                           @enderror
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-6">
                       <div class="form-group">
                           <label class="form-label">Address <span class="text-danger">*</span></label>
                           <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"   required autocomplete="address">
@@ -66,7 +66,7 @@
                           @enderror
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-6">
                        <div class="form-group">
                           <label class="form-label text-uppercase" >Upload( ID )<span class="text-danger">*</span></label>
                           <input type="file" id="upload_id" name="upload_id" accept="image/*" class="classic-input form-control font-weight-bold @error('upload_id') is-invalid @enderror">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="row mt-2">
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"  id="password"  name="password" required autocomplete="new-password" >
@@ -90,7 +90,7 @@
                             @enderror
                           </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="password-confirm" name="password_confirmation"  required autocomplete="new-password">

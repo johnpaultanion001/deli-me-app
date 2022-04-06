@@ -14,7 +14,8 @@ class HomeController extends Controller
         $products = Product::latest()->get();
         return view('welcome' ,compact('products'));
     }
-       
-   
-    
+
+    public function profile(){
+        return view('customer.profile');
+    }
 }

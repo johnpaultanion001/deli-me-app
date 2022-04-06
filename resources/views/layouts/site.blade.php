@@ -15,7 +15,8 @@
 
   <!-- Fonts -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/e64ab92996.js" crossorigin="anonymous"></script>
   <!-- css -->
   <!-- Icons -->
   <link href="{{ asset('/admin/css/nucleo-icons.css') }}" rel="stylesheet" />
@@ -44,6 +45,16 @@
       padding: 0.625rem 0.75rem !important; */
       line-height: 1.3 !important;
   }
+  .navbar-nav {
+      display: flex;
+      flex-direction: row;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+  }
+  .active{
+    color: #e91e63 !important;
+  }
 </style>
 </head>
 
@@ -56,7 +67,7 @@
       </div>
     </div>
     <div class="page-header align-items-start min-vh-100">
-        <span class="mask bg-gradient-dark opacity-6"></span>
+        <span class="mask bg-secondary"></span>
         @yield('content')
         
     </div>
