@@ -59,7 +59,8 @@
                             <div class="card card-blog card viewproduct" productid="{{  $product->id ?? '' }}">
                                 <div class="card-header p-0 mt-n4 mx-3">
                                     <a class="d-block shadow-xl border-radius-xl">
-                                        <img src="{{URL::asset('/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
+                                    
+                                        <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
                                         
                                     </a>
                                 </div>
