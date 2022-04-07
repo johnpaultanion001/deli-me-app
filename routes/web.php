@@ -25,9 +25,15 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Custo
     // Home
     Route::get('home', 'HomeController@index')->name('home');
 
+    // seach and filter
+    Route::get('home/filter', 'HomeController@filter')->name('filter');
+
     //Add To Cart
     Route::post('addtocart', 'OrderController@addtocart')->name('addtocart');
     Route::get('orders', 'OrderController@orders')->name('orders');
+    Route::get('orders/{order}', 'OrderController@edit_order')->name('edit_order');
+    Route::put('orders/{order}', 'OrderController@update_order')->name('update_order');
+    Route::delete('orders/{order}', 'OrderController@destroy_order')->name('destroy_order');
     Route::get('orders_history', 'OrderController@orders_history')->name('orders_history');
 
     //Check Out

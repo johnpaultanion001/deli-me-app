@@ -1,109 +1,112 @@
 @extends('../layouts.site')
-@section('sub-title','HOME')
+@section('sub-title','ORDERS')
 
 @section('navbar')
     @include('../partials.site.navbar')
 @endsection
 
 @section('content')
-<div class="container-fluid px-2 px-md-4">
-      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
-        <span class="mask  bg-gradient-primary  opacity-6"></span>
-      </div>
-    <div class="card card-body mx-3 mx-md-4 mt-n10">
-        <div class="row gx-4 mb-2">
-        
-         
-        </div>
+<div class="card">
+    <div class="card-header" style="box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
         <div class="row">
-            <div class="row">
-                
-                <div class="col-12 mt-4">
-                    <div class="row gx-4 mb-2">
-                    
-                        <div class="col-auto my-auto">
-                            <div class="h-100">
-                                <h5 class="mb-1">
-                                    ORDERS
-                                </h5>
-                            </div>
-                        </div>
-                        @if (Auth::user())
-                            <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                                <div class="nav-wrapper position-relative end-0">
-                                    <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                                        <li class="nav-item" id="nav_product">
-                                            <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">home</i>
-                                                <span class="ms-1">PRODUCTS</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item" id="nav_orders">
-                                            <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                                                <i class="material-icons text-lg position-relative">email</i>
-                                                <span class="ms-1">ORDERS</span>
-                                            </a>
-                                        </li>
+            <div class="col-6">
+                <h5 class="text-primary">DELI ME</h5>
+            </div>
+            <div class="col-6 text-right">
+                <h6>YOUR ORDERS</h6>
+            </div>
+        </div>
+    </div>
+    <div class="card-body mb-7">
+        <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
+                    <i class="material-icons text-lg">shopping_cart</i> <br>  
+                    Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
+                <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
+                    Orders
+                </a>
+            </li>
+        </ul>
+        <div class="row">
+            
+            <div class="col-12 mt-4">
+                <div class="card card-plain h-100">
+                    <div class="card-body p-3">
+                        <h6 class="text-danger text-center text-uppercase">{{$delivery_text}}</h6>
+                        <ul class="list-group">
+                            @forelse($orders as $order)
+                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                    <div class="avatar me-3">
+                                        <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$order->product->image)}}" alt="image" class="border-radius-lg shadow">
+                                    </div>
+                                    <div class="d-flex align-items-start flex-column justify-content-center">
+                                        <h6 class="mb-0">{{$order->product->name}}</h6>
+                                        <h6 class="mb-0 text-primary">₱ {{$order->amount}}</h6>
+                                        <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty}}</p>
+                                        <p class="mb-0 text-xs text-dark font-weight-bold">{{ $order->created_at->format('M j , Y h:i A') }}</p>
                                         
-                                        
-                                    </ul>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-success mb-0 btn-sm edit_order" order_id="{{$order->id}}">
+                                            <i class="material-icons text-lg">edit</i>
+                                        </button>
+                                        <button class="btn btn-danger mb-0 btn-sm cancel_order" order_id="{{$order->id}}">
+                                            <i class="material-icons text-lg">delete</i>
+                                        </button>
+                                    </div>
+                                </li>
+                            @empty
+                                <div class="text-center">
+                                    <h6 class="mb-0">NO ORDER FOUND</h6>
                                 </div>
-                            </div>
-                        @endif
-                    </div>
-                   
-                        
-                    <div class="col-12 col-xl-10 mx-auto" style="height: 500px; overflow: auto;">
-                        <div class="card card-plain h-100">
-                            <div class="card-header pb-0 p-3">
-                                <h6 class="mb-0">All ORDERS</h6>
-                            </div>
-                            <div class="card-body p-3">
-                                <ul class="list-group">
-                                    @foreach($orders as $order)
-                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                                            <div class="avatar me-3">
-                                                <img src="{{URL::asset('/assets/img/products/'.$order->product->image)}}" alt="image" class="border-radius-lg shadow">
-                                            </div>
-                                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                                <h6 class="mb-0">{{$order->product->name}}</h6>
-                                                <h6 class="mb-0"><span class="text-success">₱ </span>{{$order->amount}}</h6>
-                                                <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty}}</p>
-                                                <p class="mb-0 text-xs text-dark font-weight-bold">{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y / h:i:s A')}}</p>
-                                                
-                                            </div>
-                                            <div class="ms-auto">
-                                                <a class="btn btn-link pe-3 ps-0 mb-0 " href="javascript:;">EDIT</a>
-                                                <a class="btn btn-link pe-3 ps-0 mb-0 " href="javascript:;">CANCEL</a>
-                                            </div>
-                                           
-                                           
-                                           
-                                           
-                                        </li>
-                                        
-                                    @endforeach
+                            @endforelse
+                            <?php
+                                    $subtotal = $orders->sum->amount;
+                                    $service_fee = 55;
 
-                                </ul>
-                            </div>
-                           
-                        </div>
-                        
+                                    $total = $subtotal + $service_fee;
+                            ?>
+                            @if($orders->count() != 0)
+                                <hr>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0">SUBTOTAL</h6>
+                                        </div>
+                                        <div class="ms-auto text-primary">
+                                            ₱ {{ number_format($orders->sum->amount ?? '' , 2, '.', ',') }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0">DELIVERY FEE</h6>
+                                        </div>
+                                        <div class="ms-auto text-primary">
+                                            ₱ 55.00
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0">TOTAL AMOUNT</h6>
+                                        </div>
+                                        <div class="ms-auto text-primary">
+                                            ₱ {{ number_format($total ?? '' , 2, '.', ',') }}
+                                        </div>
+                                    </li>
+
+                                    <button class="btn-outline-primary btn btn-lg" id="checkout">Checkout</button>
+                            @endif
+                        </ul>
                     </div>
-                    <div class="row mx-auto mt-7 col-md-10">    
-                        <div class="col-8">
-                            <h6 class="mb-0">SUBTOTAL: <span class="text-success">₱ </span>{{$orders->sum('amount')}}</h6>
-                            <h6 class="mb-0">TOTAL: <span class="text-success">₱ </span>{{$orders->sum('amount')}}</h6>
-                        </div>  
-                        <div class="col-2">
-                            <button class="btn-primary btn btn-lg" id="checkout">Checkout</button>
-                        </div> 
-                       
-                    </div>
+                
                 </div>
             </div>
-       </div>
-  </div>
+        </div>
+    </div>
 </div>
 
 <form method="post" id="myForm">
@@ -130,13 +133,10 @@
                         <div class="card-body p-3">
                             <h5 class="mb-0" id="modal_product_name"></h5>
 
-                            <h4>
-                                <span class="text-success">₱ </span><span id="modal_product_price"></span> 
-                            </h4>
-
-                            <p class="mb-4 text-sm" id="modal_product_description">
-                                
-                            </p>
+                            <h4 class="text-primary">₱ <span id="modal_product_price"></span> </h4>
+                            <h5 class="text-sm text-dark" id="modal_product_description"></h5>
+                            <h5 class="mb-4 text-sm text-dark" id="modal_product_stock"></h5>
+                            <h5 class="mb-4 text-sm text-dark" id="modal_total_amount"></h5>
                           
                             <div class="form-group">
                               <div class="input-group input-group-outline my-3">
@@ -151,12 +151,11 @@
                       </div>
                   </div>
 
-                    <input type="hidden" name="action" id="action" value="Add" />
                     <input type="hidden" name="hidden_id" id="hidden_id" />
                     
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="action_button" id="action_button" class="btn  btn-primary" value="Add To Cart"/>
+                    <input type="submit" name="action_button" id="action_button" class="btn  btn-primary" value="UPDATE"/>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
                 </div>
             </div>
@@ -175,27 +174,22 @@
 
 @section('script')
 <script> 
-$(document).on('click', '.viewproduct', function(){
+$(document).on('click', '.edit_order', function(){
     $('#formModal').modal('show');
     $('#myForm')[0].reset();
     $('.form-control').removeClass('is-invalid');
-    var id = $(this).attr('productid');
+    var id = $(this).attr('order_id');
 
     $.ajax({
-        url :"/view/"+id,
+        url :"/customer/orders/"+id,
         dataType:"json",
         beforeSend:function(){
             $("#action_button").attr("disabled", true);
-            $("#action_button").attr("value", "Loading..");  
         },
         success:function(data){
-            if($('#action').val() == 'Edit'){
-                $("#action_button").attr("disabled", false);
-                $("#action_button").attr("value", "Update");
-            }else{
-                $("#action_button").attr("disabled", false);
-                $("#action_button").attr("value", "Add To Cart");
-            }
+            $("#action_button").attr("disabled", false);
+              
+            
             $.each(data.result, function(key,value){
                 if(key == 'name'){
                     $('#modal_product_name').html(value);
@@ -206,13 +200,112 @@ $(document).on('click', '.viewproduct', function(){
                 if(key == 'description'){
                     $('#modal_product_description').html(value);
                 }
+                if(key == 'stock'){
+                    $('#modal_product_stock').html("STOCK: "+ value);
+                }
+                if(key == 'amount'){
+                    $('#modal_total_amount').html("TOTAL AMOUNT: ₱ "+ value);
+                }
                 if(key == 'image'){
-                    $('#current_image').attr("src", '/assets/img/products/'  + value);
+                    $('#current_image').attr("src", 'http://deli-me.supsofttech.com/assets/img/products/'  + value);
+                }
+                if(key == 'qty'){
+                    $('#qty').val(value);
                 }
             })
             $('#hidden_id').val(id);
         }
     })
+});
+
+$('#myForm').on('submit', function(event){
+        event.preventDefault();
+        $('.form-control').removeClass('is-invalid')
+        var action_url = "/customer/orders/" + $('#hidden_id').val();
+        var type = "PUT";
+        
+        $.ajax({
+            url: action_url,
+            method:type,
+            data:$(this).serialize(),
+            dataType:"json",
+            beforeSend:function(){
+                $("#action_button").attr("disabled", true);
+            },
+            success:function(data){
+                $("#action_button").attr("disabled", false);
+
+                if(data.errors){
+                    $.each(data.errors, function(key,value){
+                        if(key == $('#'+key).attr('id')){
+                            $('#'+key).addClass('is-invalid')
+                            $('#error-'+key).text(value)
+                        }
+                    })
+                }
+                if(data.errorstock){
+                    $('#qty').addClass('is-invalid');
+                    $('#error-qty').text(data.errorstock);
+                }
+                if(data.success){
+                    $('.form-control').removeClass('is-invalid')
+                    $('#myForm')[0].reset();
+                    $('#formModal').modal('hide');
+                    $('#successToast').addClass('show');
+                    $('#text_information').text(data.success);
+                    setTimeout(function() { 
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            
+            
+        });
+});
+
+$(document).on('click', '.cancel_order', function(){
+  var order_id = $(this).attr('order_id');
+  $.confirm({
+      title: 'Confirmation',
+      content: 'You really want to cancel this order?',
+      type: 'red',
+      buttons: {
+          confirm: {
+              text: 'confirm',
+              btnClass: 'btn-blue',
+              action: function(){
+                  return $.ajax({
+                      url:"/customer/orders/"+order_id,
+                      method:'DELETE',
+                      data: {
+                          _token: '{!! csrf_token() !!}',
+                      },
+                      dataType:"json",
+                      beforeSend:function(){
+                           
+                      },
+                      success:function(data){
+                          if(data.success){
+                            $('.form-control').removeClass('is-invalid')
+                            $('#myForm')[0].reset();
+                            $('#formModal').modal('hide');
+                            $('#successToast').addClass('show');
+                            $('#text_information').text(data.success);
+                            setTimeout(function() { 
+                                location.reload();
+                            }, 1000);
+                          }
+                      }
+                  })
+              }
+          },
+          cancel:  {
+              text: 'cancel',
+              btnClass: 'btn-red',
+          }
+      }
+  });
+
 });
 
 $(document).on('click', '#checkout' , function(){
@@ -249,12 +342,6 @@ $('#formModal').on('shown.bs.modal', function () {
     $('#qty').focus();
 }) 
 
-$(document).on('click', '#nav_orders', function(){
-    $(location).attr('href',"/customer/orders");
-});
-$(document).on('click', '#nav_product', function(){
-    $(location).attr('href',"/");
-});
 
 
 </script>

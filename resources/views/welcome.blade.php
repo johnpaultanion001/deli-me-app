@@ -6,92 +6,69 @@
 @endsection
 
 @section('content')
-<div class="container-fluid px-0">
-    <div class="card card-body mt-8">
+
+<div class="card">
+    <div class="card-header" style="box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
         <div class="row">
-            <div class="row">
+            <div class="col-6">
+                <h5 class="text-primary">DELI ME</h5>
+            </div>
+            <div class="col-6 text-right">
+                <h6>ALL PRODUCTS</h6>
+            </div>
+        </div>
+    </div>
+    <div class="card-body mb-7">
+        <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
+                    <i class="material-icons text-lg">shopping_cart</i> <br>  
+                    Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
+                <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
+                    Orders
+                </a>
+            </li>
+        </ul>
+        <div class="row">
+            
+            <div class="col-12 mt-4">
                 
-                <div class="col-12 mt-4">
-                    <div class="row gx-4 mb-2">
-                    
-                        <div class="col-auto my-auto">
-                            <div class="h-100">
-                            <h5 class="mb-1">
-                                ALL PRODUCTS
-                            </h5>
-                            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" id="search-bar" placeholder="Find a product?">
+                        <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+                        <div class="form-group">
+                            <select name="category" id="category" style="height: 30px; width: 150px; margin-top: 5px;">
+                                <option value="">Filter Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        @if (Auth::user())
-                            <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                                <div class="nav-wrapper position-relative end-0">
-                                    <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                                        <li class="nav-item" id="nav_product">
-                                            <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                                                <i class="material-icons text-lg position-relative">home</i>
-                                                <span class="ms-1">PRODUCTS</span>
-                                            </a>
-                                        </li>
-                                        
-                                        <li class="nav-item" id="nav_orders">
-                                            <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" role="tab" href="javascript:;" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">email</i>
-                                                <span class="ms-1">ORDERS</span>
-                                            </a>
-                                        </li>
-
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12 search-container">
-                            <input type="text" id="search-bar" placeholder="Find a product?">
-                            <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
-                        </div>
-                    </div>
                         
-                    <div class="row pt-4" style="height: 520px; overflow: auto;">
-                        @foreach($products as $product)
-                        <div class="col-xl-2 col-6 mb-5">
-                            <div class="card card-blog card viewproduct" productid="{{  $product->id ?? '' }}">
-                                <div class="card-header p-0 mt-n4 mx-3">
-                                    <a class="d-block shadow-xl border-radius-xl">
-                                    
-                                        <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
-                                        
-                                    </a>
-                                </div>
-                                <div class="card-body p-3">
-                                    <h5 class="mb-0">{{$product->name}}</h5>
-
-                                    <h4>
-                                        <span class="text-success">₱</span> {{$product->price}}
-                                    </h4>
-                                    <p class="mb-4 text-sm text-dark">
-                                        {{\Illuminate\Support\Str::limit($product->description,50)}}
-                                    </p>
-                                    <p class="mb-4 text-sm text-dark">
-                                        Stock: @if($product->stock < 1)
-                                                     OUT OF STOCK 
-                                                @else
-                                                    {{$product->stock}} 
-                                                @endif
-                                    </p>
-                                    
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">Add To Cart</button>
-                                    </div>
-                                </div>
+                    </div>
+                    
+                </div>
+                    
+                <div class="row pt-4" id="product_list">
+                    @foreach($products as $product)
+                    <div class="col-md-12">
+                        <div class="card flex-row border-primary mb-3 viewproduct " productid="{{  $product->id ?? '' }}">
+                            <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
+                            <div class="card-body">
+                                <h5 class="mb-0">{{$product->name}}</h5>
+                                <h6 class="text-primary">₱ {{$product->price}}</h6>
                             </div>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
-       </div>
+        </div>
     </div>
 </div>
 
@@ -119,16 +96,9 @@
                         <div class="card-body p-3">
                             <h5 class="mb-0" id="modal_product_name"></h5>
 
-                            <h4>
-                                <span class="text-success">₱ </span><span id="modal_product_price"></span> 
-                            </h4>
-
-                            <p class="mb-4 text-sm text-dark" id="modal_product_description">
-                                
-                            </p>
-                            <p class="mb-4 text-sm text-dark" id="modal_product_stock">
-                                
-                            </p>
+                            <h4 class="text-primary">₱ <span id="modal_product_price"></span> </h4>
+                            <h5 class="text-sm text-dark" id="modal_product_description"></h5>
+                            <h5 class="mb-4 text-sm text-dark" id="modal_product_stock"></h5>
                           
                             <div class="form-group">
                               <div class="input-group input-group-outline my-3">
@@ -200,10 +170,10 @@
                         $('#modal_product_description').html(value);
                     }
                     if(key == 'stock'){
-                        $('#modal_product_stock').html("Stock: "+ value);
+                        $('#modal_product_stock').html("STOCK: "+ value);
                     }
                     if(key == 'image'){
-                        $('#current_image').attr("src", '/assets/img/products/'  + value);
+                        $('#current_image').attr("src", 'http://deli-me.supsofttech.com/assets/img/products/'  + value);
                     }
                 })
                 $('#hidden_id').val(id);
@@ -222,11 +192,7 @@
         var action_url = "{{ route('customer.addtocart') }}";
         var type = "POST";
 
-        if($('#action').val() == 'Edit'){
-            // var id = $('#hidden_id').val();
-            // action_url = "appointments/" + id;
-            // type = "PUT";
-        }
+        
 
         $.ajax({
             url: action_url,
@@ -265,18 +231,100 @@
 
                 }
             },
-            error:function() {
-                $(location).attr('href',"/login");
-            },
-            
         });
     });
 
-    $(document).on('click', '#nav_product', function(){
-        $(location).attr('href',"/");
+    
+    $('#search-bar').on("input", function() {
+        var filter = 'search';
+        var value = this.value;
+
+        $.ajax({
+        url: "/customer/home/filter", 
+        type: "get",
+        dataType:"json",
+        data: {
+            filter:filter, value:value ,_token: '{!! csrf_token() !!}',
+        },
+        beforeSend: function() {
+            
+        },
+        success: function(data){
+                if(data.products){
+                        var products = '';
+                        $.each(data.products, function(key,value){
+                            products += '<div class="col-md-12">'
+                                products  += '<div class="card flex-row border-primary mb-3 viewproduct" productid="'+value.id+'">';
+                                    products  += '<img src="http://deli-me.supsofttech.com/assets/img/products/'+value.image+'" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">';
+                                    products  += '<div class="card-body">';
+                                        products  += '<h5 class="mb-0">'+value.name+'</h5>';
+                                        products  += '<h6 class="text-primary">₱ '+value.price+'</h6>';
+                                    products  += '</div>';
+                                products  += '</div>';
+                            products  += '</div>';
+                        });
+                        $('#product_list').empty().append(products);
+                    }
+                    if(data.no_data){
+                        var products = '';
+                        products += '<div class="col-md-12">'
+                            products  += '<div class="card flex-row border-primary mb-3">';
+                                products  += '<div class="card-body">';
+                                    products  += '<h5 class="mb-0">'+data.no_data+'</h5>';
+                                products  += '</div>';
+                            products  += '</div>';
+                        products  += '</div>';
+                    
+                        $('#product_list').empty().append(products);
+                    }
+                },
+            });
     });
-    $(document).on('click', '#nav_orders', function(){
-        $(location).attr('href',"/customer/orders");
+
+    $('#category').on("change", function(event){
+        var filter = 'category';
+        var value = this.value;
+
+        $.ajax({
+        url: "/customer/home/filter", 
+        type: "get",
+        dataType:"json",
+        data: {
+            filter:filter, value:value ,_token: '{!! csrf_token() !!}',
+        },
+        beforeSend: function() {
+            
+        },
+        success: function(data){
+                if(data.products){
+                        var products = '';
+                        $.each(data.products, function(key,value){
+                            products += '<div class="col-md-12">'
+                                products  += '<div class="card flex-row border-primary mb-3 viewproduct" productid="'+value.id+'">';
+                                    products  += '<img src="http://deli-me.supsofttech.com/assets/img/products/'+value.image+'" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">';
+                                    products  += '<div class="card-body">';
+                                        products  += '<h5 class="mb-0">'+value.name+'</h5>';
+                                        products  += '<h6 class="text-primary">₱ '+value.price+'</h6>';
+                                    products  += '</div>';
+                                products  += '</div>';
+                            products  += '</div>';
+                        });
+                        $('#product_list').empty().append(products);
+                    }
+                    if(data.no_data){
+                        var products = '';
+                        products += '<div class="col-md-12">'
+                            products  += '<div class="card flex-row border-primary mb-3">';
+                                products  += '<div class="card-body">';
+                                    products  += '<h5 class="mb-0">'+data.no_data+'</h5>';
+                                products  += '</div>';
+                            products  += '</div>';
+                        products  += '</div>';
+                    
+                        $('#product_list').empty().append(products);
+                    }
+                },
+            });
     });
 
 

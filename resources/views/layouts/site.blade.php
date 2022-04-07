@@ -31,6 +31,8 @@
 
   <!-- CSS Files -->
   <link href="{{ asset('/admin/css/material-dashboard.css?v=3.0.0') }}" type="text/css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <style>
   .nav-pills .nav-item .active {
     font-weight: 600;
@@ -58,16 +60,9 @@
 </style>
 </head>
 
-<body class="bg-gray-200">
-    <div class="container position-sticky z-index-sticky top-0">
-      <div class="row">
-        <div class="col-12">
-            @yield('navbar')
-        </div>
-      </div>
-    </div>
-    <div class="page-header align-items-start min-vh-100">
-        <span class="mask bg-secondary"></span>
+<body>
+  
+    <div class="align-items-start">
         @yield('content')
         
     </div>
@@ -75,7 +70,7 @@
       {{ csrf_field() }}
     </form>
 
-    <div class="position-fixed  bottom-1 end-1 z-index-1051">
+    <div class="position-fixed  bottom-1 end-1 z-index-2">
         <div class="toast fade hide p-2 bg-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
           <div class="toast-header bg-success border-0">
             <i class="material-icons text-white me-2">

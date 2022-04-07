@@ -6,13 +6,13 @@
 @endsection
 
 @section('content')
-<div class="container my-auto mt-8 mb-6">
+<div class="container my-auto mt-6 mb-6">
     <div class="row">
         <div class="col-lg-10 col-md-8 col-12 mx-auto">
           <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign up</h4>
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">REGISTER</h4>
                   <div class="row mt-3">
                 
                   </div>
@@ -101,11 +101,11 @@
                   </div>
 
                       <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign up</button>
+                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Register</button>
                       </div>
                       <p class="mt-4 text-sm text-center">
                         Already a member?
-                        <a href="/login" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                        <a href="/login" class="text-primary text-gradient font-weight-bold">LOGIN</a>
                       </p>
                 </form>
               </div>

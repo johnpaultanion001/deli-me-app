@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="container my-auto">
+<div class="container my-auto mt-6">
     <div class="row">
         <div class="col-lg-4 col-md-8 col-12 mx-auto">
           <div class="card z-index-0 fadeIn3 fadeInBottom">
