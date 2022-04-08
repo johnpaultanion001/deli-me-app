@@ -56,15 +56,45 @@
   }
   .active{
     color: #e91e63 !important;
+    font-weight: bold !important;
   }
+  .nav-link:hover{
+    color: #e91e63 !important;
+    font-weight: bold !important;
+  }
+  .nav-link:focus{
+    color: #e91e63 !important;
+    font-weight: bold !important;
+  }
+  .nav-link{
+    font-size: 15px !important;
+  }
+  .card-header:first-child {
+    border-radius: 0 !important;
+  }
+
+  .badge {
+    padding: 0.55em 0.9em;
+    font-size: 0.95em;
+    margin-bottom: 2px;
+  }
+  select{
+    border: 1px solid #D0CFCE;
+  }
+  select:focus{
+    border: 1px solid #D0CFCE;
+  }
+
 </style>
 </head>
 
 <body>
   
     <div class="align-items-start">
+      <div class="card" style="box-shadow: none !important;">
+        @yield('navbar')
         @yield('content')
-        
+      </div>
     </div>
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
       {{ csrf_field() }}
@@ -81,7 +111,7 @@
             <i class="fas fa-times text-md ms-3 cursor-pointer text-white" data-bs-dismiss="toast" aria-label="Close"></i>
           </div>
           <hr class="horizontal dark m-0">
-          <div class="toast-body text-white" id="text_information">
+          <div class="toast-body text-white  text-uppercase" id="text_information">
             Successfully Added.
           </div>
         </div>
@@ -95,7 +125,7 @@
             <i class="fas fa-times text-md ms-3 cursor-pointer text-white" data-bs-dismiss="toast" aria-label="Close"></i>
           </div>
           <hr class="horizontal dark m-0">
-          <div class="toast-body text-white" id="text_information_error">
+          <div class="toast-body text-white  text-uppercase" id="text_information_error">
             Successfully Added.
           </div>
         </div>

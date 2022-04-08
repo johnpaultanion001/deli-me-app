@@ -10,12 +10,24 @@ Route::get('/clear-cache', function() {
 
 // Route::get('/', 'LandingpageController@index')->name('landingpage');
 Route::get('view/{product}', 'LandingpageController@view')->name('view');
-
+Route::get('about_us', function() {
+    return view('customer.about_us');
+  });
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Customer', 'middleware' => ['auth']], function () {
     Route::get('/approve', function() {
            return view('auth.checkapprove');
          });
+
+    //Profile
+    Route::get('profile', 'HomeController@profile')->name('profile');
+    Route::put('profile', 'HomeController@profile_update')->name('profile.update');
+    Route::put('profile/change_password/{user}', 'HomeController@passwordupdate')->name('profile.passwordupdate');
+    
+    Route::get('/complete/password',  function() {
+        return view('auth.passwords.complete_password');
+      });
+    
  });
 
 Auth::routes();
@@ -39,8 +51,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Custo
     //Check Out
     Route::post('checkout', 'OrderController@checkout')->name('checkout');
 
-    //Profile
-    Route::get('profile', 'HomeController@profile')->name('profile');
+    
 
 });
 

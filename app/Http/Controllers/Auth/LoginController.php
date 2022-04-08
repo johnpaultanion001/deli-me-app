@@ -55,7 +55,7 @@ class LoginController extends Controller
          if(Auth::user()->role == 'customer'){
              $redirectTo = '/customer/home';
          }else if(Auth::user()->role == 'admin'){
-             $redirectTo = '/admin/dashboard';
+             $redirectTo = '/customer/home';
          }
 
          return $request->wantsJson()

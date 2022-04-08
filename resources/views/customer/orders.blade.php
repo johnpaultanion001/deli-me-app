@@ -6,104 +6,93 @@
 @endsection
 
 @section('content')
-<div class="card">
-    <div class="card-header" style="box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-        <div class="row">
-            <div class="col-6">
-                <h5 class="text-primary">DELI ME</h5>
-            </div>
-            <div class="col-6 text-right">
-                <h6>YOUR ORDERS</h6>
-            </div>
-        </div>
-    </div>
-    <div class="card-body mb-7">
-        <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
-                    <i class="material-icons text-lg">shopping_cart</i> <br>  
-                    Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
-                <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
-                    Orders
-                </a>
-            </li>
-        </ul>
-        <div class="row">
-            
-            <div class="col-12 mt-4">
-                <div class="card card-plain h-100">
-                    <div class="card-body p-3">
-                        <h6 class="text-danger text-center text-uppercase">{{$delivery_text}}</h6>
-                        <ul class="list-group">
-                            @forelse($orders as $order)
+
+<div class="card-body mb-7">
+    <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
+                <i class="material-icons text-lg">shopping_cart</i> <br>  
+                Products
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
+            <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
+                Orders
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        
+        <div class="col-12 mt-4">
+            <div class="card card-plain h-100">
+                <div class="card-body p-3">
+                    <h6 class="text-danger text-center text-uppercase">{{$delivery_text}}</h6>
+                    <ul class="list-group">
+                        @forelse($orders as $order)
+                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                <div class="avatar me-3">
+                                    <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$order->product->image)}}" alt="image" class="border-radius-lg shadow">
+                                </div>
+                                <div class="d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="mb-0">{{$order->product->name}}</h6>
+                                    <h6 class="mb-0 text-primary">₱ {{$order->amount}}</h6>
+                                    <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty}}</p>
+                                    <p class="mb-0 text-xs text-dark font-weight-bold">{{ $order->created_at->format('M j , Y h:i A') }}</p>
+                                    
+                                </div>
+                                <div class="ms-auto">
+                                    <button class="btn btn-success mb-0 btn-sm edit_order" order_id="{{$order->id}}">
+                                        <i class="material-icons text-lg">edit</i>
+                                    </button>
+                                    <button class="btn btn-danger mb-0 btn-sm cancel_order" order_id="{{$order->id}}">
+                                        <i class="material-icons text-lg">delete</i>
+                                    </button>
+                                </div>
+                            </li>
+                        @empty
+                            <div class="text-center">
+                                <h6 class="mb-0">NO ORDER FOUND</h6>
+                            </div>
+                        @endforelse
+                        <?php
+                                $subtotal = $orders->sum->amount;
+                                $service_fee = 55;
+
+                                $total = $subtotal + $service_fee;
+                        ?>
+                        @if($orders->count() != 0)
+                            <hr>
                                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                                    <div class="avatar me-3">
-                                        <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$order->product->image)}}" alt="image" class="border-radius-lg shadow">
-                                    </div>
                                     <div class="d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="mb-0">{{$order->product->name}}</h6>
-                                        <h6 class="mb-0 text-primary">₱ {{$order->amount}}</h6>
-                                        <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty}}</p>
-                                        <p class="mb-0 text-xs text-dark font-weight-bold">{{ $order->created_at->format('M j , Y h:i A') }}</p>
-                                        
+                                        <h6 class="mb-0">SUBTOTAL</h6>
                                     </div>
-                                    <div class="ms-auto">
-                                        <button class="btn btn-success mb-0 btn-sm edit_order" order_id="{{$order->id}}">
-                                            <i class="material-icons text-lg">edit</i>
-                                        </button>
-                                        <button class="btn btn-danger mb-0 btn-sm cancel_order" order_id="{{$order->id}}">
-                                            <i class="material-icons text-lg">delete</i>
-                                        </button>
+                                    <div class="ms-auto text-primary">
+                                        ₱ {{ number_format($orders->sum->amount ?? '' , 2, '.', ',') }}
                                     </div>
                                 </li>
-                            @empty
-                                <div class="text-center">
-                                    <h6 class="mb-0">NO ORDER FOUND</h6>
-                                </div>
-                            @endforelse
-                            <?php
-                                    $subtotal = $orders->sum->amount;
-                                    $service_fee = 55;
+                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                    <div class="d-flex align-items-start flex-column justify-content-center">
+                                        <h6 class="mb-0">DELIVERY FEE</h6>
+                                    </div>
+                                    <div class="ms-auto text-primary">
+                                        ₱ 55.00
+                                    </div>
+                                </li>
+                                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+                                    <div class="d-flex align-items-start flex-column justify-content-center">
+                                        <h6 class="mb-0">TOTAL AMOUNT</h6>
+                                    </div>
+                                    <div class="ms-auto text-primary">
+                                        ₱ {{ number_format($total ?? '' , 2, '.', ',') }}
+                                    </div>
+                                </li>
 
-                                    $total = $subtotal + $service_fee;
-                            ?>
-                            @if($orders->count() != 0)
-                                <hr>
-                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                                        <div class="d-flex align-items-start flex-column justify-content-center">
-                                            <h6 class="mb-0">SUBTOTAL</h6>
-                                        </div>
-                                        <div class="ms-auto text-primary">
-                                            ₱ {{ number_format($orders->sum->amount ?? '' , 2, '.', ',') }}
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                                        <div class="d-flex align-items-start flex-column justify-content-center">
-                                            <h6 class="mb-0">DELIVERY FEE</h6>
-                                        </div>
-                                        <div class="ms-auto text-primary">
-                                            ₱ 55.00
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                                        <div class="d-flex align-items-start flex-column justify-content-center">
-                                            <h6 class="mb-0">TOTAL AMOUNT</h6>
-                                        </div>
-                                        <div class="ms-auto text-primary">
-                                            ₱ {{ number_format($total ?? '' , 2, '.', ',') }}
-                                        </div>
-                                    </li>
-
-                                    <button class="btn-outline-primary btn btn-lg" id="checkout">Checkout</button>
-                            @endif
-                        </ul>
-                    </div>
-                
+                                <button class="btn-outline-primary btn btn-lg" id="checkout">Checkout</button>
+                        @endif
+                    </ul>
                 </div>
+            
             </div>
         </div>
     </div>
@@ -322,7 +311,11 @@ $(document).on('click', '#checkout' , function(){
         },
         success:function(data){
             $("#checkout").attr("disabled",false);
-            $("#checkout").text("CHECKOUT");  
+            $("#checkout").text("CHECKOUT");
+            if(data.no_stock){
+                $('#dangerToast').addClass('show');
+                $('#text_information_error').html(data.no_stock);
+            }  
             if(data.nodata){
                 $('#dangerToast').addClass('show');
                 $('#text_information_error').text(data.nodata);

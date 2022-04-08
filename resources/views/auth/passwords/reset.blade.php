@@ -60,9 +60,6 @@
 </div>
  
 @endsection
-@section('footer')
-    @include('../partials.site.footer')
-@endsection
 
 @section('script')
 <script> 

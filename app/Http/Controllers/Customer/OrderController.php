@@ -130,12 +130,21 @@ class OrderController extends Controller
             'user_id'   => auth()->user()->id
         ]);
         foreach($orderproducts as $order){
-            Product::where('id', $order->product->id)->decrement('stock', $order->qty);
-            OrderProduct::where('id', $order->id)
-                            ->update([
-                                'order_id' => $orders->id,
-                                'isCheckout' => true,
-                            ]);
+            if($order->qty > $order->product->stock){
+                Order::find($orders->id)->delete();
+                return response()->json(['no_stock' => 'Out of stock <br>
+                                                        Product: '.$order->product->name.
+                                                        '<br> Qty: '.$order->qty. 
+                                                        '<br> Available Stock: '.$order->product->stock]);
+            }else{
+                Product::where('id', $order->product->id)->decrement('stock', $order->qty);
+                OrderProduct::where('id', $order->id)
+                                ->update([
+                                    'order_id' => $orders->id,
+                                    'isCheckout' => true,
+                                ]);
+            }
+           
         }
         return response()->json(['success' => 'Successfully Checkout.']);
         

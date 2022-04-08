@@ -7,66 +7,52 @@
 
 @section('content')
 
-<div class="card">
-    <div class="card-header" style="box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
-        <div class="row">
-            <div class="col-6">
-                <h5 class="text-primary">DELI ME</h5>
-            </div>
-            <div class="col-6 text-right">
-                <h6>ALL PRODUCTS</h6>
-            </div>
-        </div>
-    </div>
-    <div class="card-body mb-7">
-        <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
-                    <i class="material-icons text-lg">shopping_cart</i> <br>  
-                    Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
-                <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
-                    Orders
-                </a>
-            </li>
-        </ul>
-        <div class="row">
+<div class="card-body mb-7">
+    <ul class="nav nav-tabs justify-content-center text-center text-uppercase font-weight-bold">
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('customer/home') ? 'active' : '' }}" href="/customer/home" style="color: #344767;">
+                <i class="material-icons text-lg">shopping_cart</i> <br>  
+                Products
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('customer/orders') ? 'active' : '' }}" href="/customer/orders" style="color: #344767;">
+            <i class="material-icons text-lg">shopping_cart_checkout</i> <br>  
+                Orders
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        
+        <div class="col-12 mt-4">
             
-            <div class="col-12 mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <input type="text" id="search-bar" placeholder="Find a product?">
+                    <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+                </div>
+                <div class="col-12 mt-n6">
+                    <select name="category" id="category" style="height: 44px; width: 100%; ">
+                        <option value="">Filter Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
                 
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" id="search-bar" placeholder="Find a product?">
-                        <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
-                        <div class="form-group">
-                            <select name="category" id="category" style="height: 30px; width: 150px; margin-top: 5px;">
-                                <option value="">Filter Category</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                    
-                <div class="row pt-4" id="product_list">
-                    @foreach($products as $product)
-                    <div class="col-md-12">
-                        <div class="card flex-row border-primary mb-3 viewproduct " productid="{{  $product->id ?? '' }}">
-                            <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
-                            <div class="card-body">
-                                <h5 class="mb-0">{{$product->name}}</h5>
-                                <h6 class="text-primary">₱ {{$product->price}}</h6>
-                            </div>
+            <div class="row pt-4" id="product_list">
+                @foreach($products as $product)
+                <div class="col-md-12">
+                    <div class="card flex-row border-primary mb-3 viewproduct " productid="{{  $product->id ?? '' }}">
+                        <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
+                        <div class="card-body">
+                            <h5 class="mb-0">{{$product->name}}</h5>
+                            <h6 class="text-primary">₱ {{$product->price}}</h6>
                         </div>
                     </div>
-                    @endforeach
                 </div>
+                @endforeach
             </div>
         </div>
     </div>

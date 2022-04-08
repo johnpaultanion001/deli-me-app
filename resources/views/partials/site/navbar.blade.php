@@ -1,19 +1,22 @@
-<!-- Navbar -->
-<style>
-  #navbar  {
-      position: fixed;
-      height: 50px;
-      top: 0;
-      width: 100%;
-      background-color: white;
-  }
-</style>
-
-<navbar class="navbar" id="navbar">
-  <div class="container-fluid ps-2 pe-0">
-    <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/">
-        {{ trans('panel.site_title') }}
-    </a>
-  </div>
-</navbar>
-<!-- End Navbar -->
+<div class="card-header bg-gradient-primary shadow-primary" style="box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);">
+    <div class="row">
+        <div class="col-6">
+            <h5 class="text-white">DELI ME</h5>
+        </div>
+        <div class="col-6 text-right">
+            <h6 class="text-white">
+              @if(request()->is('customer/home'))
+                ALL PRODUCTS
+              @elseif(request()->is('customer/orders'))
+                YOUR ORDERS 
+              @elseif(request()->is('customer/profile'))
+                YOUR INFORMATION
+              @elseif(request()->is('customer/orders_history'))
+                ORDERS HISTORY
+              @elseif(request()->is('about_us'))
+                ABOUT US
+              @endif
+            </h6>
+        </div>
+    </div>
+</div>

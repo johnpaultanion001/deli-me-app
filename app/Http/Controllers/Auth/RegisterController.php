@@ -45,7 +45,8 @@ class RegisterController extends Controller
             'contact_number' => ['required', 'string', 'min:8','max:11','unique:users'],
             'address' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'upload_id' =>  ['required' , 'mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'],
+            'upload_id' =>  ['required' , 'mimes:png,jpg,jpeg,svg,bmp,ico', 'max:10000'],
+            'terms_and_conditions' => 'accepted',
         ]);
     }
 
