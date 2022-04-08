@@ -42,14 +42,15 @@
                                     
                                 </div>
                                 <div class="ms-auto">
-                                    <button class="btn btn-success mb-0 btn-sm edit_order" order_id="{{$order->id}}">
+                                    <button class="btn btn-success mb-2 btn-sm edit_order" order_id="{{$order->id}}">
                                         <i class="material-icons text-lg">edit</i>
-                                    </button>
+                                    </button> <br>
                                     <button class="btn btn-danger mb-0 btn-sm cancel_order" order_id="{{$order->id}}">
                                         <i class="material-icons text-lg">delete</i>
                                     </button>
                                 </div>
                             </li>
+                            <hr>
                         @empty
                             <div class="text-center">
                                 <h6 class="mb-0">NO ORDER FOUND</h6>

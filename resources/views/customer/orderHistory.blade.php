@@ -49,18 +49,19 @@
                                                 <h6 class="text-xs text-uppercase"> {{ $order->created_at->format('M j , Y h:i A') }}</h6>
                                                
                                                 <h6 class="text-s mt-2 text-warning">{{$order->status}}</h6>
+                                                <?php
+                                                    $subtotal = $order->orderproducts->sum->amount;
+                                                    $service_fee = 55;
+
+                                                    $total = $subtotal + $service_fee;
+                                                ?>
+                                                <hr>
+                                                <h6  class="text-s mt-2">SUBTOTAL: <span class="text-primary"> ₱  {{number_format($order->orderproducts->sum->amount?? '' , 2, '.', ',')}}</span> </h6>
+                                                <h6  class="text-s mt-2">DELIVERY FEE: <span class="text-primary"> ₱  55.00</span> </h6>
+                                                <h6  class="text-s mt-2">TOTAL: <span class="text-primary"> ₱  {{ number_format($total ?? '' , 2, '.', ',') }}</span> </h6>
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-center font-weight-bold text-primary">
-                                        <?php
-                                                $subtotal = $order->orderproducts->sum->amount;
-                                                $service_fee = 55;
-
-                                                $total = $subtotal + $service_fee;
-                                        ?>
-
-                                            ₱  {{ number_format($total ?? '' , 2, '.', ',') }}
-                                        </div>
+                                       
                                     </li>
                                     <hr>
                                 @empty
@@ -95,21 +96,23 @@
                                                 @foreach($order->orderproducts as $product_order)
                                                     <span class="badge bg-success">{{$product_order->qty}} {{$product_order->product->name}} * {{$product_order->product->price}} = {{$product_order->amount}}</span> <br>
                                                 @endforeach
-                                                <span class="badge bg-success">SERVICE FEE: 55.00</span> <br>
                                             </h6>
                                                 <h6 class="text-xs text-uppercase"> {{ $order->created_at->format('M j , Y h:i A') }}</h6>
                                                 <h6 class="text-s mt-2 text-success">{{$order->status}}</h6>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center font-weight-bold text-primary">
-                                            <?php
+                                                <?php
                                                     $subtotal = $order->orderproducts->sum->amount;
                                                     $service_fee = 55;
 
                                                     $total = $subtotal + $service_fee;
-                                            ?>
-                                            ₱  {{ number_format($total ?? '' , 2, '.', ',') }}
+                                                ?>
+                                                <hr>
+                                                <h6  class="text-s mt-2">SUBTOTAL: <span class="text-primary"> ₱  {{number_format($order->orderproducts->sum->amount?? '' , 2, '.', ',')}}</span> </h6>
+                                                <h6  class="text-s mt-2">DELIVERY FEE: <span class="text-primary"> ₱  55.00</span> </h6>
+                                                <h6  class="text-s mt-2">TOTAL: <span class="text-primary"> ₱  {{ number_format($total ?? '' , 2, '.', ',') }}</span> </h6>
+                                               
+                                            </div>
                                         </div>
+                                        
                                     </li>
                                     <hr>
                                 @empty

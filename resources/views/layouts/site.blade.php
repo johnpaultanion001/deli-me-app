@@ -80,6 +80,7 @@
   }
   select{
     border: 1px solid #D0CFCE;
+    background-color: white;
   }
   select:focus{
     border: 1px solid #D0CFCE;
