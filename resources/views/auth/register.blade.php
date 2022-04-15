@@ -8,7 +8,7 @@
 @section('content')
 <div class="card-body mt-2 mb-5">
     <div class="col-lg-10 col-md-8 col-12 mx-auto">
-      <div class="card z-index-0 fadeIn3 fadeInBottom">
+      <div class="z-index-0 fadeIn3 fadeInBottom">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
               <h6 class="text-white font-weight-bolder text-center mt-2 mb-0">SIGN UP</h6>
@@ -189,20 +189,19 @@
 
 $(document).on('click', '#btn_upload_id', function(){
     $.confirm({
-      title: 'Confirmation',
-      content: 'Allow APP to access photos and media on you device? ',
-      type: 'green',
+      title: '',
+      content: 'Allow <b> DELI-ME </b> to access photos ,media, and files on you device? ',
       buttons: {
+          cancel:  {
+              text: 'Deny',
+              btnClass: 'btn-link-danger',
+          },
           confirm: {
               text: 'Allow',
-              btnClass: 'btn-blue',
+              btnClass: 'btn-link',
               action: function(){
                 $('#upload_id').trigger('click');
               }
-          },
-          cancel:  {
-              text: 'Deny',
-              btnClass: 'btn-red',
           }
       }
   });
