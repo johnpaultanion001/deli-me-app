@@ -44,7 +44,6 @@
                                                 @foreach($order->orderproducts as $product_order)
                                                     <span class="badge bg-warning">{{$product_order->qty}} {{$product_order->product->name}} * {{$product_order->product->price}} = {{$product_order->amount}}</span> <br>
                                                 @endforeach
-                                                <span class="badge bg-warning">SERVICE FEE: 55.00</span> <br>
                                             </h6>
                                                 <h6 class="text-xs text-uppercase"> {{ $order->created_at->format('M j , Y h:i A') }}</h6>
                                                
