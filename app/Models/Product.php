@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'image',
         'name',
         'category_id',
@@ -22,5 +23,9 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function store()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

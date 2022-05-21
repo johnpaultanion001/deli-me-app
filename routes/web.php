@@ -51,6 +51,11 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Custo
     //Check Out
     Route::post('checkout', 'OrderController@checkout')->name('checkout');
 
+    //cancel
+    Route::post('orders/cancel/{order}', 'OrderController@cancel')->name('orders.cancel');
+
+    Route::post('feedback', 'FeedbackController@store')->name('feedback.store');
+
     
 
 });

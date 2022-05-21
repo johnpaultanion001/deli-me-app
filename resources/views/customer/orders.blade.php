@@ -27,7 +27,7 @@
         <div class="col-12 mt-4">
             <div class="card card-plain h-100">
                 <div class="card-body p-3">
-                    <h6 class="text-danger text-center text-uppercase">{{$delivery_text}}</h6>
+                    <h6 class="text-danger text-center text-uppercase">* Estimated time of approval is 1-2 hours</h6>
                     <ul class="list-group">
                         @forelse($orders as $order)
                             <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
@@ -35,9 +35,9 @@
                                     <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$order->product->image)}}" alt="image" class="border-radius-lg shadow">
                                 </div>
                                 <div class="d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="mb-0">{{$order->product->name}}</h6>
-                                    <h6 class="mb-0 text-primary">₱ {{$order->amount}}</h6>
-                                    <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty}}</p>
+                                    <h6 class="mb-0">{{$order->product->name ?? ''}}</h6>
+                                    <h6 class="mb-0 text-primary">₱ {{$order->amount ?? ''}}</h6>
+                                    <p class="mb-0 text-xs text-dark font-weight-bold">QTY: {{$order->qty ?? ''}}</p>
                                     <p class="mb-0 text-xs text-dark font-weight-bold">{{ $order->created_at->format('M j , Y h:i A') }}</p>
                                     
                                 </div>
@@ -77,7 +77,7 @@
                                         <h6 class="mb-0">DELIVERY FEE</h6>
                                     </div>
                                     <div class="ms-auto text-primary">
-                                        ₱ 55.00
+                                        ₱ 55.00 / Kilo
                                     </div>
                                 </li>
                                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
@@ -157,10 +157,6 @@
     @include('../partials.site.footer')
 @endsection
 @endsection
-
-
-
-
 
 @section('script')
 <script> 

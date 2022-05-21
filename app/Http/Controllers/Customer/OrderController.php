@@ -39,6 +39,7 @@ class OrderController extends Controller
             ],
             [
                 'user_id'    => auth()->user()->id,
+                'store_id'   => $product->store->id,
                 'product_id' => $request->input('hidden_id'),
                 'qty'        => $request->input('qty'),
                 'amount'     => $amount,
@@ -151,9 +152,27 @@ class OrderController extends Controller
     }
     public function orders_history(){
         $orders = Order::where('user_id', auth()->user()->id)
-                            ->where('status', "PENDING")->get();
+                            ->where('status', "PENDING")->latest()->get();
         $orders_approved = Order::where('user_id', auth()->user()->id)
-                            ->where('status', "APPROVED")->get();
+                            ->where('status', "APPROVED")->latest()->get();
         return view('customer.orderHistory' ,compact('orders' , 'orders_approved'));
     }
+
+
+    public function cancel(Request $request, Order $order)
+    {
+        Order::find($order->id)
+                    ->update([
+                        'status'    => 'CANCELLED'
+                    ]);
+
+        foreach($order->orderproducts()->get() as $order){
+                Product::where('id', $order->product->id)->increment('stock', $order->qty);
+        }
+        
+
+        return response()->json(['success' => 'Successfully Cancelled.']);
+        
+    }
+    
 }

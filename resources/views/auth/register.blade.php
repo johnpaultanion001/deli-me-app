@@ -135,7 +135,7 @@
             <h6>
               TERMS AND CONDITIONS <br>
               <p>
-                Please read these Terms of Service before using this application; by using this application, you acknowledge that you have read, understood, and agreed to these Terms of Service. Do not use this application if you do not agree to the Terms of Service.
+                  Please read these Terms of Service before using this application; by using this application, you acknowledge that you have read, understood, and agreed to these Terms of Service. Do not use this application if you do not agree to the Terms of Service. 
               </p>
                 
               MODE OF PAYMENT<br>
@@ -145,31 +145,13 @@
 
               DELIVERY TIME<br>
               <p>
-                The application will implement a timed delivery method, the delivery will take place at a specific time and will not be changeable.
+                Before the ordered products delivered, Your order will be deliver tomorrow, start of delivery will be 8 to 9 am estimated time arrive of delivery boat will be 45 minutes. 
               </p>
               
-              AM order will be delivered at 11am on subay port<br>
-              Cut off approval of order is 10am<br>
-
-              PM order will be delivered at 5pm on subay port<br>
-              Cut off approval of order is 4pm<br>
-
-              <br>
               PRIVACY POLICY<br>
               <p>
-                Please read these Privacy policy, using this application means you have read, understood and accepted these Privacy policy, If you do not accept these do not use this application.
+                Please read these Privacy policy, using this application means you have read, understood and accepted these Privacy policy, If you do not accept these do not use this application. Our Privacy Commitment Please read these privacy policy, by using this application, you acknowledge that you have read, understood, and agreed to these terms. If you do not agree, do not use this application. Personal information we need We only collects, your personal information that is necessary for us to be able to provide the service, which include the following: 1. Your name, address, email , contact number and valid ID that proves you are from brgy subay. 2. Your selected items and time order.
               </p>
-              Our Privacy Commitment<br>
-              <p>
-                Please read these privacy policy, by using this application, you acknowledge that you have read, understood, and agreed to these terms. If you do not agree, do not use this application.
-              </p>
-              Personal information we need<br>
-              <p>
-                We only collects, your personal information that is necessary for us to be able to provide the service, which include the following: 
-              </p>
-              1. Your name, address, email , contact number and valid ID that proves you are from brgy subay.
-              <br>
-              2. Your selected items and time order.<br>
             </h6>
             </div>
             <div class="modal-footer">

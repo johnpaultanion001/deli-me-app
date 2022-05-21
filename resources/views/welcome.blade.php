@@ -29,13 +29,13 @@
             <div class="row">
                 <div class="col-12">
                     <input type="text" id="search-bar" placeholder="Find a product?">
-                    <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+                    <img class="search-icon" src="{{URL::asset('/assets/img/search-icon.png')}}">
                 </div>
                 <div class="col-12 mt-n6">
                     <select name="category" id="category" style="height: 44px; width: 100%; ">
                         <option value="">Filter Category</option>
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}">{{$category->name ?? ''}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -47,8 +47,9 @@
                     <div class="card flex-row border-primary mb-3 viewproduct " productid="{{  $product->id ?? '' }}">
                         <img src="{{URL::asset('http://deli-me.supsofttech.com/assets/img/products/'.$product->image)}}" alt="img-blur-shadow" class="border-radius-xl" width="150" style="height: 100px;">
                         <div class="card-body">
-                            <h5 class="mb-0">{{$product->name}}</h5>
-                            <h6 class="text-primary">₱ {{$product->price}}</h6>
+                            <h5 class="mb-0">{{$product->name ?? ''}}</h5>
+                            <h6 class="text-success">{{$product->store->name ?? ''}}</h6>
+                            <h6 class="text-primary">₱ {{$product->price ?? ''}}</h6>
                         </div>
                     </div>
                 </div>

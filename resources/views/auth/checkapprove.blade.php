@@ -11,7 +11,11 @@
         <div class="z-index-0 fadeIn3 fadeInBottom">
             <div class="card-body">
                 <div class="card-header text-center">
-                    <h3 class="card-title title-up">Thank you for registering, please wait for a response from an administrator to confirm your registration.</h3>
+                    <h3 class="card-title title-up">
+                    THANK YOU FOR REGISTERING PLEASE WAIT FOR A RESPONSE
+                    FOR AN ADMINISTRATOR TO CONFIRM YOUR REGISTRATION ESTIMATED TIME OF
+                    2-8 HOURS
+                    </h3>
                 </div>
             </div>
         </div>
